@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import {
@@ -225,15 +226,13 @@ function App() {
                 {msg.sender === "ai" && (
                   <Avatar
                     sx={{
-                      bgcolor: "#bbdefb",
-                      color: "#1976d2",
                       width: 36,
                       height: 36,
                       mr: 1,
                     }}
-                  >
-                    <ChatBubbleOutlineIcon />
-                  </Avatar>
+                    src="/TriviaBot logo.png"
+                    alt="TriviaBot"
+                  />
                 )}
                 {/* User message in speech bubble, AI message as plain text */}
                 {msg.sender === "user" ? (
