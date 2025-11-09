@@ -10,6 +10,7 @@ import {
   Avatar,
   Drawer,
 } from "@mui/material";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 // Main App component
 function App() {
@@ -136,7 +137,7 @@ function App() {
               }
             }}
           >
-            <span role="img" aria-label="Mascot">🦉</span>
+            <img src="/triviabot-logo.png" alt="TriviaBot Mascot" style={{ width: '48px', height: '48px' }} />
           </Paper>
         </Box>
       </Drawer>
@@ -224,13 +225,15 @@ function App() {
                 {msg.sender === "ai" && (
                   <Avatar
                     sx={{
+                      bgcolor: "#bbdefb",
+                      color: "#1976d2",
                       width: 36,
                       height: 36,
                       mr: 1,
                     }}
-                    src="/triviabot-logo.png"
-                    alt="TriviaBot"
-                  />
+                  >
+                    <ChatBubbleOutlineIcon />
+                  </Avatar>
                 )}
                 {/* User message in speech bubble, AI message as plain text */}
                 {msg.sender === "user" ? (
