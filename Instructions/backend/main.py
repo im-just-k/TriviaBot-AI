@@ -11,13 +11,19 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 
+print("API Keys Status:")
+print("API Keys Status:")
+print("MISTRAL_API_KEY present:", "Yes" if MISTRAL_API_KEY else "No")
+print("GOOGLE_API_KEY present:", "Yes" if GOOGLE_API_KEY else "No")
+print("SEARCH_ENGINE_ID present:", "Yes" if SEARCH_ENGINE_ID else "No")
+
 app = FastAPI()
 
-# CORS middleware
+# CORS middleware allowing all origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For development only
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=False,  # Must be False when allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -72,7 +78,7 @@ async def root():
 async def chat(request: ChatRequest):
     url = "https://api.mistral.ai/v1/chat/completions"
     headers = {
-        "Authorization": f"Bearer {MISTRAL_API_KEY}",
+        "Authorization": f"Bearer {MISTRAL_API_KEY}",  # Adding Bearer prefix
         "Content-Type": "application/json"
     }
     data = {
@@ -91,15 +97,28 @@ async def chat(request: ChatRequest):
         ]
     }
     try:
+        print("Attempting to call Mistral API...")
+        print("API URL:", url)
+        print("Headers:", {k: '...' if k == 'Authorization' else v for k, v in headers.items()})
+        print("Request data:", data)
+        
         resp = requests.post(url, headers=headers, json=data)
-        print("Mistral API status:", resp.status_code)
-        print("Mistral API response:", resp.text)
+        print("\nMistral API Response:")
+        print("Status code:", resp.status_code)
+        print("Response headers:", dict(resp.headers))
+        print("Response text:", resp.text)
+        
         resp.raise_for_status()
         result = resp.json()
         return {"response": result["choices"][0]["message"]["content"]}
-    except Exception as e:
-        print("Error in /chat:", e, flush=True)
+    except requests.exceptions.RequestException as e:
+        print("\nNetwork or API Error:", str(e))
+        if hasattr(e.response, 'text'):
+            print("Error response:", e.response.text)
         raise HTTPException(status_code=500, detail="Mistral API error: " + str(e))
+    except Exception as e:
+        print("\nUnexpected Error:", str(e))
+        raise HTTPException(status_code=500, detail="Server error: " + str(e))
 
 @app.post("/survey")
 async def survey(request: SurveyRequest):
