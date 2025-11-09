@@ -115,16 +115,29 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <img 
-            src="/triviabot-logo.png" 
-            alt="TriviaBot Logo" 
-            style={{ 
-              width: 'calc(100% - 20px)', // Full width minus smaller padding
-              height: 'auto',
-              maxWidth: '500px', // Increased maximum size
-              padding: '10px' // Reduced padding to allow for larger image
-            }} 
-          />
+          <Box sx={{ textAlign: 'center' }}>
+            <img 
+              src="/triviabot-logo.png" 
+              alt="TriviaBot Logo" 
+              style={{ 
+                width: 'calc(100% - 20px)',
+                height: 'auto',
+                maxWidth: '500px',
+                padding: '10px'
+              }} 
+            />
+            <Typography
+              variant="h4"
+              sx={{
+                fontFamily: "'Fredoka', Arial, sans-serif",
+                marginTop: '10px',
+                color: '#1976d2',
+                fontWeight: 500
+              }}
+            >
+              TriviaBot AI
+            </Typography>
+          </Box>
         </Box>
       </Drawer>
       {/* Right: Chatbox */}
