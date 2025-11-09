@@ -104,7 +104,7 @@ function App() {
         }}
         open
       >
-        {/* Mascot centered in sidebar */}
+        {/* Logo centered in sidebar */}
         <Box
           sx={{
             width: "100%",
@@ -115,30 +115,7 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <Paper
-            elevation={6}
-            sx={{
-              width: 90,
-              height: 110,
-              borderRadius: 4,
-              boxShadow: "0 4px 16px #0d47a1",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "3.5rem",
-              color: "#ffd600",
-              fontWeight: 700,
-              border: "4px solid #ffd600",
-              bgcolor: "#fffde7",
-              animation: "bounce 2s infinite alternate",
-              "@keyframes bounce": {
-                "0%": { transform: "translateY(0)" },
-                "100%": { transform: "translateY(-10px)" }
-              }
-            }}
-          >
-            <img src="/triviabot-logo.png" alt="TriviaBot Mascot" style={{ width: '48px', height: '48px' }} />
-          </Paper>
+          <img src="/triviabot-logo.png" alt="TriviaBot Logo" style={{ width: '90px', height: 'auto' }} />
         </Box>
       </Drawer>
       {/* Right: Chatbox */}
