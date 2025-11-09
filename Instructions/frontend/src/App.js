@@ -119,10 +119,10 @@ function App() {
             src="/triviabot-logo.png" 
             alt="TriviaBot Logo" 
             style={{ 
-              width: 'calc(100% - 40px)', // Full width minus padding
+              width: 'calc(100% - 20px)', // Full width minus smaller padding
               height: 'auto',
-              maxWidth: '300px', // Maximum size cap
-              padding: '20px' // Add some padding around the image
+              maxWidth: '500px', // Increased maximum size
+              padding: '10px' // Reduced padding to allow for larger image
             }} 
           />
         </Box>
