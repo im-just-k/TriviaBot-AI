@@ -131,7 +131,7 @@ function App() {
               sx={{
                 fontFamily: "'Fredoka', Arial, sans-serif",
                 marginTop: '10px',
-                color: '#1976d2',
+                color: '#fff',
                 fontWeight: 500
               }}
             >
