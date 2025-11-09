@@ -49,7 +49,7 @@ function App() {
     setMessage(""); // Clear input
     try {
       // Send message to backend API
-      const res = await fetch("http://127.0.0.1:8002/chat", {
+      const res = await fetch("http://127.0.0.1:8003/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message }),
