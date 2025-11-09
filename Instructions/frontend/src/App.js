@@ -115,7 +115,16 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <img src="/triviabot-logo.png" alt="TriviaBot Logo" style={{ width: '90px', height: 'auto' }} />
+          <img 
+            src="/triviabot-logo.png" 
+            alt="TriviaBot Logo" 
+            style={{ 
+              width: 'calc(100% - 40px)', // Full width minus padding
+              height: 'auto',
+              maxWidth: '300px', // Maximum size cap
+              padding: '20px' // Add some padding around the image
+            }} 
+          />
         </Box>
       </Drawer>
       {/* Right: Chatbox */}
