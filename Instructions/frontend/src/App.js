@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react"
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import {
@@ -11,7 +10,6 @@ import {
   Avatar,
   Drawer,
 } from "@mui/material";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 // Main App component
 function App() {
@@ -230,7 +228,7 @@ function App() {
                       height: 36,
                       mr: 1,
                     }}
-                    src="/TriviaBot logo.png"
+                    src="/triviabot-logo.png"
                     alt="TriviaBot"
                   />
                 )}
