@@ -30,15 +30,6 @@ Summarize the current status of major features/components.
 *   **Trivia Logic & Content:**
     *   Status: [e.g., % Complete / In Progress / Completed]
     *   Notes: [e.g., Random question generation working, category/difficulty selection in progress.]
-*   **Score Tracking:**
-    *   Status: [e.g., % Complete / Not Started / In Progress]
-    *   Notes: [e.g., Session-based score tracking implemented, group scoring planned.]
-*   **User Profiles & Group Play:**
-    *   Status: [e.g., % Complete / Not Started / In Progress]
-    *   Notes: [e.g., Basic group session logic drafted.]
-*   **[Add Other Major Features as needed]**
-    *   Status: [...]
-    *   Notes: [...]
 
 ## 3. Testing Status
 
@@ -74,7 +65,7 @@ Identify current challenges and potential risks, along with mitigation plans.
 
 Specific action items and priorities for the upcoming period (e.g., next sprint/week).
 
-*   Complete development of [Specific Feature/Module, e.g., group play logic].
+*   Complete development of [Specific Feature/Module].
 *   Finalize integration of [Specific Component, e.g., category selection].
 *   Submit [Specific Item, e.g., trivia content batch for review].
 *   Plan kickoff for [Specific Activity, e.g., user testing].
