@@ -100,12 +100,12 @@ function App() {
         <Box
           sx={{
             width: "100%",
-            flex: 1,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             px: 2,
+            py: 2,
           }}
         >
           <img 
@@ -114,21 +114,22 @@ function App() {
             style={{ 
               width: "100%",
               height: "auto",
-              maxWidth: "250px",
-              padding: "10px"
+              maxWidth: "120px",
+              padding: "5px"
             }} 
           />
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
               fontFamily: "'Fredoka', Arial, sans-serif",
-              marginTop: "20px",
+              marginTop: "10px",
               color: "#fff",
               fontWeight: 700,
               textAlign: "center",
+              fontSize: "0.9rem",
             }}
           >
-            TriviaBot AI
+            TriviaBot
           </Typography>
         </Box>
       </Box>
