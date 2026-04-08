@@ -77,7 +77,7 @@ function App() {
         open={sidebarOpen}
         PaperProps={{
           sx: {
-            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
+            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 60,
             bgcolor: "#1565c0",
             color: "#fff",
             border: "none",
@@ -90,10 +90,10 @@ function App() {
           }
         }}
         sx={{
-          width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
+          width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 60,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
+            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 60,
             boxSizing: "border-box",
             transition: "width 0.3s ease",
           },
@@ -104,18 +104,24 @@ function App() {
           onClick={() => setSidebarOpen(!sidebarOpen)}
           sx={{
             color: "#fff",
-            mt: 2,
-            mb: 2,
+            mt: 1,
+            mb: 1,
+            width: 50,
+            height: 50,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
           }}
         >
-          <CloseIcon />
+          {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
         {/* Logo centered in sidebar */}
         {sidebarOpen && (
           <Box
             sx={{
               width: "100%",
-              height: "100vh",
+              flex: 1,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -162,21 +168,6 @@ function App() {
           overflow: "hidden",
         }}
       >
-        {/* Menu button when sidebar is closed */}
-        {!sidebarOpen && (
-          <IconButton
-            onClick={() => setSidebarOpen(true)}
-            sx={{
-              position: "absolute",
-              top: 16,
-              left: 16,
-              color: "#1565c0",
-              zIndex: 5,
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
         {/* Centered Chat Container */}
         <Box
           sx={{
