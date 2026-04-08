@@ -34,7 +34,7 @@ async def chat(request: ChatRequest):
         "Content-Type": "application/json"
     }
     data = {
-        "model": "mistral-large-3",
+        "model": "mistral-small-3.2",
         "messages": [
             {
                 "role": "system",
