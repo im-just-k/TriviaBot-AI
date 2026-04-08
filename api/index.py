@@ -1,36 +1,21 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import requests
-import os
+def handler(event, context):
+    path = event.get('path', '')
+    method = event.get('httpMethod', '')
 
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
-
-app = FastAPI()
-
-# CORS middleware allowing all origins
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=False,  # Must be False when allow_origins=["*"]
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# --- Pydantic models ---
-class ChatRequest(BaseModel):
-    message: str
-
-# --- Endpoints ---
-@app.get("/")
-async def root():
-    return {"message": "TriviaBot backend is running!"}
-
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    # Temporary: return a fixed response to test routing
-    return {"response": "Test response from backend!"}
-
-# Vercel serverless handler
-from mangum import Mangum
-handler = Mangum(app)
+    if path == '/api/' and method == 'GET':
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': '{"message": "TriviaBot backend is running!"}'
+        }
+    elif path == '/api/chat' and method == 'POST':
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': '{"response": "Test response from backend!"}'
+        }
+    else:
+        return {
+            'statusCode': 404,
+            'body': 'Not Found'
+        }
