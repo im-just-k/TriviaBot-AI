@@ -22,13 +22,13 @@ function App() {
     { sender: "ai", text: "Welcome! I'm TriviaBot 🤖. Ask me for a trivia question or try to stump me!" }
   ]);
   const [loading, setLoading] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef(null);
 
   // Dynamically calculate sidebar width so chatbox is centered
   const chatboxMaxWidth = 1000;
   const minSidebarWidth = 120;
-  const sidebarWidth = 250;
+  const sidebarWidth = Math.max((window.innerWidth - chatboxMaxWidth) / 2, minSidebarWidth);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,66 +73,80 @@ function App() {
     >
       {/* Sidebar using MUI Drawer */}
       <Drawer
-        variant="temporary"
+        variant="permanent"
         open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
         PaperProps={{
           sx: {
-            width: sidebarWidth,
+            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
             bgcolor: "#1565c0",
             color: "#fff",
             border: "none",
-            boxShadow: "2px 0 8px #90caf9",
+            boxShadow: sidebarOpen ? "2px 0 8px #90caf9" : "none",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "flex-start",
+            transition: "width 0.3s ease",
           }
         }}
         sx={{
-          width: sidebarWidth,
+          width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: sidebarWidth,
+            width: sidebarOpen ? (Math.max((window.innerWidth - 1000) / 2, 120)) : 0,
             boxSizing: "border-box",
+            transition: "width 0.3s ease",
           },
         }}
       >
-        {/* Logo centered in sidebar */}
-        <Box
+        {/* Toggle button at the top */}
+        <IconButton
+          onClick={() => setSidebarOpen(!sidebarOpen)}
           sx={{
-            width: "100%",
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            color: "#fff",
+            mt: 2,
+            mb: 2,
           }}
         >
-          <Box sx={{ textAlign: 'center' }}>
-            <img 
-              src="/triviabot-logo.png" 
-              alt="TriviaBot Logo" 
-              style={{ 
-                width: 'calc(100% - 20px)',
-                height: 'auto',
-                maxWidth: '500px',
-                padding: '10px'
-              }} 
-            />
-            <Typography
-              variant="h4"
-              sx={{
-                fontFamily: "'Fredoka', Arial, sans-serif",
-                marginTop: '10px',
-                color: '#fff',
-                fontWeight: 500
-              }}
-            >
-              TriviaBot AI
-            </Typography>
+          <CloseIcon />
+        </IconButton>
+        {/* Logo centered in sidebar */}
+        {sidebarOpen && (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box sx={{ textAlign: 'center' }}>
+              <img 
+                src="/triviabot-logo.png" 
+                alt="TriviaBot Logo" 
+                style={{ 
+                  width: 'calc(100% - 20px)',
+                  height: 'auto',
+                  maxWidth: '500px',
+                  padding: '10px'
+                }} 
+              />
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "'Fredoka', Arial, sans-serif",
+                  marginTop: '10px',
+                  color: '#fff',
+                  fontWeight: 500
+                }}
+              >
+                TriviaBot AI
+              </Typography>
+            </Box>
           </Box>
-        </Box>
+        )}
       </Drawer>
       {/* Right: Chatbox */}
       <Box
@@ -148,6 +162,21 @@ function App() {
           overflow: "hidden",
         }}
       >
+        {/* Menu button when sidebar is closed */}
+        {!sidebarOpen && (
+          <IconButton
+            onClick={() => setSidebarOpen(true)}
+            sx={{
+              position: "absolute",
+              top: 16,
+              left: 16,
+              color: "#1565c0",
+              zIndex: 5,
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
         {/* Centered Chat Container */}
         <Box
           sx={{
@@ -161,27 +190,6 @@ function App() {
             height: "100%",
           }}
         >
-          {/* Header with Menu Button */}
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              px: 2,
-              pt: 2,
-            }}
-          >
-            <IconButton
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              sx={{
-                color: "#1565c0",
-                fontSize: 28,
-              }}
-            >
-              {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
-          </Box>
           {/* Chat Title */}
           <Typography
             variant="h5"
@@ -193,7 +201,7 @@ function App() {
               textAlign: "center",
               letterSpacing: 1,
               textShadow: "1px 1px 0 #bbdefb",
-              pt: 2,
+              pt: 4,
               pb: 1.5,
               width: "100%",
             }}
