@@ -70,23 +70,21 @@ function App() {
         overflow: "hidden",
       }}
     >
-      {/* Toggle button - visible when sidebar is closed */}
-      {!sidebarOpen && (
-        <IconButton
-          onClick={() => setSidebarOpen(true)}
-          sx={{
-            position: "absolute",
-            top: 16,
-            left: 16,
-            color: "#1565c0",
-            zIndex: 100,
-            bgcolor: "#fff",
-            "&:hover": { bgcolor: "#f0f0f0" },
-          }}
-        >
-          <MenuIcon sx={{ fontSize: 28 }} />
-        </IconButton>
-      )}
+      {/* Toggle button - menu icon when closed, X when open */}
+      <IconButton
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        sx={{
+          position: "absolute",
+          top: 16,
+          left: 16,
+          color: sidebarOpen ? "#fff" : "#1565c0",
+          zIndex: 100,
+          bgcolor: sidebarOpen ? "#1565c0" : "#fff",
+          "&:hover": { bgcolor: sidebarOpen ? "#0d47a1" : "#f0f0f0" },
+        }}
+      >
+        {sidebarOpen ? <CloseIcon sx={{ fontSize: 28 }} /> : <MenuIcon sx={{ fontSize: 28 }} />}
+      </IconButton>
 
       {/* Sidebar */}
       <Box
@@ -106,24 +104,9 @@ function App() {
           pt: 2,
         }}
       >
-        {/* Close button */}
-        {sidebarOpen && (
-          <IconButton
-            onClick={() => setSidebarOpen(false)}
-            sx={{
-              color: "#fff",
-              mb: 2,
-              alignSelf: "flex-start",
-              ml: 1,
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        )}
-
         {/* Logo and title */}
         {sidebarOpen && (
-          <Box sx={{ textAlign: "center", width: "100%", px: 2 }}>
+          <Box sx={{ textAlign: "center", width: "100%", px: 2, mt: 6 }}>
             <img
               src="/triviabot-logo.png"
               alt="TriviaBot Logo"
