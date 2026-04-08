@@ -9,8 +9,11 @@ import {
   Button,
   Avatar,
   Drawer,
+  IconButton,
 } from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Main App component
 function App() {
@@ -19,23 +22,13 @@ function App() {
     { sender: "ai", text: "Welcome! I'm TriviaBot 🤖. Ask me for a trivia question or try to stump me!" }
   ]);
   const [loading, setLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Dynamically calculate sidebar width so chatbox is centered
   const chatboxMaxWidth = 1000;
   const minSidebarWidth = 120;
-  const [sidebarWidth, setSidebarWidth] = useState(() =>
-    Math.max((window.innerWidth - chatboxMaxWidth) / 2, minSidebarWidth)
-  );
-
-  useEffect(() => {
-    // Update sidebar width on resize to keep chatbox centered
-    const handleResize = () => {
-      setSidebarWidth(Math.max((window.innerWidth - chatboxMaxWidth) / 2, minSidebarWidth));
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const sidebarWidth = 250;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -80,7 +73,9 @@ function App() {
     >
       {/* Sidebar using MUI Drawer */}
       <Drawer
-        variant="permanent"
+        variant="temporary"
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         PaperProps={{
           sx: {
             width: sidebarWidth,
@@ -102,7 +97,6 @@ function App() {
             boxSizing: "border-box",
           },
         }}
-        open
       >
         {/* Logo centered in sidebar */}
         <Box
@@ -167,6 +161,27 @@ function App() {
             height: "100%",
           }}
         >
+          {/* Header with Menu Button */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              px: 2,
+              pt: 2,
+            }}
+          >
+            <IconButton
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              sx={{
+                color: "#1565c0",
+                fontSize: 28,
+              }}
+            >
+              {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          </Box>
           {/* Chat Title */}
           <Typography
             variant="h5"
@@ -178,7 +193,7 @@ function App() {
               textAlign: "center",
               letterSpacing: 1,
               textShadow: "1px 1px 0 #bbdefb",
-              pt: 4,
+              pt: 2,
               pb: 1.5,
               width: "100%",
             }}
